@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wajeeh Ahmad — SEO Specialist &amp; Performance Marketer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Sora:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#080b14; --bg2:#0d1220; --card:#11162650;
+  --ink:#eef1fb; --ink-soft:#93a0c2;
+  --line:#232a42;
+  --blue:#4b6bff; --cyan:#3fe0d0; --lime:#a6ff5c; --pink:#ff3e9a;
+  --grad: linear-gradient(100deg,var(--blue),var(--cyan) 55%,var(--lime));
+  --sans:'Sora',sans-serif; --head:'Bricolage Grotesque',sans-serif; --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:70px;}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+::selection{background:var(--lime);color:#0a0e1a;}
+
+/* progress bar */
+#progress{position:fixed;top:0;left:0;height:3px;width:0%;background:var(--grad);z-index:100;transition:width .1s linear;}
+
+/* nav */
+header.bar{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);
+  background:linear-gradient(180deg,rgba(8,11,20,.9),rgba(8,11,20,0));pointer-events:none;}
+.bar-inner{max-width:1040px;margin:0 auto;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;pointer-events:auto;}
+.logo{font-family:var(--head);font-weight:700;font-size:16px;}
+.logo span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.dotnav{display:flex;gap:10px;}
+.dotnav button{width:8px;height:8px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer;padding:0;transition:.2s;}
+.dotnav button.active{background:var(--lime);border-color:var(--lime);box-shadow:0 0 10px var(--lime);}
+@media (max-width:640px){.dotnav{display:none}}
+
+/* hero */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative;padding:120px 0 60px;overflow:hidden;}
+.glow{position:absolute;width:60vw;height:60vw;max-width:700px;max-height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(75,107,255,.35),transparent 65%);filter:blur(30px);
+  top:-10%;right:-15%;pointer-events:none;z-index:0;}
+.hero-inner{position:relative;z-index:2;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);
+  border:1px solid var(--line);padding:6px 12px;border-radius:99px;margin-bottom:28px;}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--lime);box-shadow:0 0 8px var(--lime);}
+h1{font-family:var(--head);font-weight:800;font-size:clamp(38px,7vw,72px);line-height:1.02;letter-spacing:-.02em;margin:0 0 22px;max-width:14ch;}
+h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero p.sub{max-width:52ch;color:var(--ink-soft);font-size:18px;margin:0 0 36px;}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:56px;}
+.btn{font-family:var(--sans);font-weight:600;font-size:14.5px;padding:14px 26px;border-radius:99px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .2s ease,box-shadow .2s ease;}
+.btn-solid{background:var(--grad);color:#060810;}
+.btn-solid:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(75,107,255,.6);}
+.btn-ghost{border:1px solid var(--line);color:var(--ink);}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* chart */
+.chart-wrap{width:100%;max-width:680px;}
+svg#rankChart{width:100%;height:auto;display:block;}
+.chart-path{stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 2.2s .3s cubic-bezier(.65,0,.35,1) forwards;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+.chart-dot{opacity:0;animation:dotpop .5s ease forwards;}
+@keyframes dotpop{to{opacity:1;}}
+.chart-label{font-family:var(--mono);font-size:11px;fill:var(--ink-soft);}
+
+/* stats */
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:8px;}
+.stat b{display:block;font-family:var(--head);font-weight:700;font-size:clamp(24px,3.4vw,34px);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.stat span{font-size:12.5px;color:var(--ink-soft);}
+@media (max-width:640px){.stat-row{grid-template-columns:1fr 1fr;}}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1;transform:none;}
+
+/* sections */
+section{padding:100px 0;position:relative;}
+.sec-eyebrow{font-family:var(--mono);font-size:12.5px;color:var(--cyan);letter-spacing:.02em;margin-bottom:10px;}
+h2{font-family:var(--head);font-weight:700;font-size:clamp(26px,4vw,38px);margin:0 0 44px;max-width:16ch;letter-spacing:-.01em;}
+
+/* expertise */
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+@media (max-width:700px){.exp-grid{grid-template-columns:1fr}}
+.exp-card{border:1px solid var(--line);border-radius:18px;padding:28px;background:linear-gradient(160deg,var(--card),transparent);}
+.exp-card h3{font-family:var(--head);font-size:17px;margin:0 0 16px;font-weight:700;}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;}
+.tag{font-size:13px;padding:7px 12px;border:1px solid var(--line);border-radius:99px;color:var(--ink-soft);transition:.2s;}
+.tag:hover{border-color:var(--lime);color:var(--ink);}
+
+/* experience timeline */
+.tl{border-left:2px solid var(--line);padding-left:28px;position:relative;}
+.tl::before{content:"";position:absolute;left:-6px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime);}
+.tl h3{font-family:var(--head);font-size:20px;margin:0 0 2px;font-weight:700;}
+.tl .co{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.tl .when{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);margin-bottom:20px;display:block;}
+ul.findings{margin:0;padding:0;list-style:none;}
+ul.findings li{position:relative;padding-left:22px;margin-bottom:12px;font-size:15.5px;color:var(--ink-soft);}
+ul.findings li::before{content:"›";position:absolute;left:0;color:var(--cyan);font-weight:700;}
+
+/* case cards */
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media (max-width:760px){.case-grid{grid-template-columns:1fr}}
+.case{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--bg2);transition:transform .25s ease, border-color .25s ease;}
+.case:hover{transform:translateY(-6px);border-color:var(--cyan);}
+.case-top{height:88px;display:flex;align-items:flex-end;padding:14px 20px;}
+.case-body{padding:20px 20px 24px;}
+.case-body h3{font-family:var(--head);font-size:17px;margin:0 0 4px;font-weight:700;}
+.case-body a.url{font-family:var(--mono);font-size:12px;color:var(--cyan);text-decoration:none;}
+.case-body a.url:hover{text-decoration:underline;}
+.case-body ul{margin:14px 0 0;padding-left:18px;font-size:13.5px;color:var(--ink-soft);}
+.case-body ul li{margin-bottom:5px;}
+
+/* marquee */
+.marquee-wrap{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;}
+.marquee{display:flex;gap:48px;width:max-content;animation:scroll 26s linear infinite;font-family:var(--mono);font-size:14px;color:var(--ink-soft);}
+.marquee span{white-space:nowrap;}
+.marquee span b{color:var(--ink);font-weight:500;}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){.marquee{animation:none;}}
+
+/* education */
+.edu-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px;}
+.edu-row:last-child{border-bottom:none;}
+.edu-row .yr{font-family:var(--mono);color:var(--ink-soft);font-size:12.5px;}
+
+/* contact */
+.contact{border-radius:28px;background:linear-gradient(150deg,#11172c,#0a0e1a);border:1px solid var(--line);padding:56px 36px;text-align:center;position:relative;overflow:hidden;}
+.contact::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(166,255,92,.12),transparent 50%);}
+.contact h2{margin:0 auto 18px;max-width:none;}
+.contact p{color:var(--ink-soft);max-width:44ch;margin:0 auto 32px;}
+.contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;position:relative;z-index:2;}
+
+/* complete badge */
+.complete{margin-top:70px;text-align:center;}
+.complete .badge{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px;color:var(--lime);border:1px solid var(--lime);padding:10px 18px;border-radius:99px;opacity:0;transition:opacity .6s ease;}
+.complete .badge.in{opacity:1;}
+
+footer{padding:40px 0 60px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<header class="bar">
+  <div class="bar-inner">
+    <div class="logo">Wajeeh<span>.</span>Ahmad</div>
+    <div class="dotnav" id="dotnav">
+      <button data-target="hero" aria-label="Home" class="active"></button>
+      <button data-target="expertise" aria-label="Expertise"></button>
+      <button data-target="experience" aria-label="Experience"></button>
+      <button data-target="work" aria-label="Work"></button>
+      <button data-target="stack" aria-label="Stack"></button>
+      <button data-target="contact" aria-label="Contact"></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="hero">
+    <div class="glow"></div>
+    <div class="wrap hero-inner">
+      <div class="eyebrow"><span class="dot"></span>Open to new SEO &amp; performance projects</div>
+      <h1>I get sites out of<br>page two and <span class="grad">keep them there.</span></h1>
+      <p class="sub">Wajeeh Ahmad — Senior SEO Specialist &amp; Performance Marketer. Technical audits, content strategy, and paid campaigns across Google, Meta and TikTok, run for clients in the UK, US, UAE and KSA.</p>
+      <div class="cta-row">
+        <a class="btn btn-solid" href="#work">See the work</a>
+        <a class="btn btn-ghost" href="mailto:wajeeh.ahmad18@gmail.com">wajeeh.ahmad18@gmail.com</a>
+      </div>
+
+      <div class="chart-wrap">
+        <svg id="rankChart" viewBox="0 0 680 200" fill="none">
+          <line x1="0" y1="170" x2="680" y2="170" stroke="#232a42" stroke-width="1"/>
+          <path class="chart-path" d="M0,150 C90,155 120,60 220,80 C300,96 330,150 420,110 C500,78 520,40 620,26" stroke="url(#lg)" stroke-width="3" stroke-linecap="round"/>
+          <circle class="chart-dot" cx="620" cy="26" r="6" fill="#a6ff5c" style="animation-delay:2.3s"/>
+          <text class="chart-label" x="0" y="190">Month 1</text>
+          <text class="chart-label" x="600" y="190">Today</text>
+          <text class="chart-label" x="555" y="18">Page 1</text>
+          <defs>
+            <linearGradient id="lg" x1="0" y1="0" x2="680" y2="0">
+              <stop offset="0" stop-color="#4b6bff"/>
+              <stop offset=".55" stop-color="#3fe0d0"/>
+              <stop offset="1" stop-color="#a6ff5c"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat"><b data-target="100%">0%</b><span>Technical audit precision</span></div>
+        <div class="stat"><b data-target="4 regions">0</b><span>UK, US, UAE &amp; KSA campaigns</span></div>
+        <div class="stat"><b data-target="High ROAS">—</b><span>Across Google, Meta &amp; TikTok</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+
+    <section id="expertise">
+      <div class="reveal"><div class="sec-eyebrow">01 / Expertise</div>
+      <h2>Two sides of the same growth engine.</h2></div>
+      <div class="exp-grid">
+        <div class="exp-card reveal">
+          <h3>Technical &amp; on-page SEO</h3>
+          <div class="tag-row">
+            <span class="tag">Site audits</span><span class="tag">Crawlability &amp; indexing</span>
+            <span class="tag">Core Web Vitals</span><span class="tag">JSON-LD schema</span>
+            <span class="tag">XML sitemaps</span><span class="tag">Keyword intent mapping</span>
+            <span class="tag">High-CTR meta setup</span>
+          </div>
+        </div>
+        <div class="exp-card reveal">
+          <h3>Off-page, security &amp; performance</h3>
+          <div class="tag-row">
+            <span class="tag">Backlink audits</span><span class="tag">Link disavow</span>
+            <span class="tag">Spam score cleanup</span><span class="tag">Google Search Ads</span>
+            <span class="tag">Meta Ads (FB/IG)</span><span class="tag">TikTok Ads</span>
+            <span class="tag">ROAS optimization</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="reveal"><div class="sec-eyebrow">02 / Experience</div>
+      <h2>Where it's happening now.</h2></div>
+      <div class="tl reveal">
+        <h3>Senior SEO Specialist &amp; Performance Marketer · <span class="co">Nodlays</span></h3>
+        <span class="when">2024 — Present</span>
+        <ul class="findings">
+          <li>Led technical SEO audits and structural remediations across multiple enterprise client properties.</li>
+          <li>Managed paid campaigns across Google, Meta and TikTok, driving acquisition and scaling ROAS.</li>
+          <li>Lowered domain spam scores through toxic backlink audits and Google Link Disavow workflows.</li>
+          <li>Configured JSON-LD schema and restructured content hierarchies for better rich snippet visibility.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="reveal"><div class="sec-eyebrow">03 / Selected work</div>
+      <h2>Six sites, six different search problems.</h2></div>
+      <div class="case-grid" id="caseGrid">
+        <div class="case reveal">
+          <div class="case-top" style="background:linear-gradient(120deg,#4b6bff,#3fe0d0);"></div>
+          <div class="case-body">
+            <h3>Vullcan</h3>
+            <a class="url" href="https://vullcan.co.uk" target="_blank" rel="noopener">vullcan.co.uk</a>
+            <ul><li>Full technical audit — resolved crawl issues, optimized Core Web Vitals.</li>
+            <li>Keyword research, on-page SEO, UK directory citations.</li></ul>
+          </div>
+        </div>
+        <div class="case reveal">
+          <div class="case-top" style="background:linear-gradient(120deg,#ff3e9a,#ffb14b);"></div>
+          <div class="case-body">
+            <h3>Applekid</h3>
+            <a class="url" href="https://applekid.pk" target="_blank" rel="noopener">applekid.pk</a>
+            <ul><li>Full site audit and intent-based keyword research.</li>
+            <li>High-CTR meta titles, local citations and listings.</li></ul>
+          </div>
+        </div>
+        <div class="case reveal">
+          <div class="case-top" style="background:linear-gradient(120deg,#a6ff5c,#3fe0d0);"></div>
+          <div class="case-body">
+            <h3>Pizza on Fire</h3>
+            <a class="url" href="https://pizzaonfire.co.uk" target="_blank" rel="noopener">pizzaonfire.co.uk</a>
+            <ul><li>Local UK SEO — directory citations, technical fixes.</li>
+            <li>High-intent local keyword research for restaurant traffic.</li></ul>
+          </div>
+        </div>
+        <div class="case reveal">
+          <div class="case-top" style="background:linear-gradient(120deg,#4b6bff,#ff3e9a);"></div>
+          <div class="case-body">
+            <h3>UK Hybrid Automotive</h3>
+            <a class="url" href="https://ukhybridautomotive.co.uk" target="_blank" rel="noopener">ukhybridautomotive.co.uk</a>
+            <ul><li>Location-based citations for the Luton branch.</li>
+            <li>Localized keyword strategy and schema structures.</li></ul>
+          </div>
+        </div>
+        <div class="case reveal">
+          <div class="case-top" style="background:linear-gradient(120deg,#3fe0d0,#4b6bff);"></div>
+          <div class="case-body">
+            <h3>Tajrjild</h3>
+            <a class="url" href="https://tajrjild.com" target="_blank" rel="noopener">tajrjild.com</a>
+            <ul><li>Competitor analysis and keyword targeting across UAE and KSA.</li>
+            <li>Content structure built around regional search behavior.</li></ul>
+          </div>
+        </div>
+        <div class="case reveal">
+          <div class="case-top" style="background:linear-gradient(120deg,#ffb14b,#ff3e9a);"></div>
+          <div class="case-body">
+            <h3>IronDevs X ERP</h3>
+            <a class="url" href="https://irondevsxerp.com" target="_blank" rel="noopener">irondevsxerp.com</a>
+            <ul><li>Technical SEO strategy, image optimization, schema integration.</li>
+            <li>Citations across high DA/PA Canadian directories for Toronto.</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="marquee-wrap reveal">
+    <div class="marquee" id="marquee">
+      <span><b>GSC</b> · Screaming Frog · Ahrefs · SEMrush · GA4 · WordPress · Elementor · WooCommerce · <b>Google Ads</b> · Meta Manager · TikTok Ads · Canva · Copywriting · Intent Briefing ·&nbsp;</span>
+      <span aria-hidden="true"><b>GSC</b> · Screaming Frog · Ahrefs · SEMrush · GA4 · WordPress · Elementor · WooCommerce · <b>Google Ads</b> · Meta Manager · TikTok Ads · Canva · Copywriting · Intent Briefing ·&nbsp;</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section id="stack">
+      <div class="reveal"><div class="sec-eyebrow">04 / Education &amp; certifications</div>
+      <h2>Credentials on record.</h2></div>
+      <div class="reveal">
+        <div class="edu-row"><span>Intermediate, Punjab Group of Colleges</span><span class="yr">2016</span></div>
+        <div class="edu-row"><span>Matriculation, Allied School</span><span class="yr">2014</span></div>
+        <div class="edu-row"><span>DigiSkills — Affiliate Marketing &amp; WordPress Certification</span><span class="yr">Cert.</span></div>
+        <div class="edu-row"><span>JDC IT City — Digital Marketing Masterclass</span><span class="yr">Cert.</span></div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact reveal">
+        <div class="sec-eyebrow" style="text-align:center;">05 / Get in touch</div>
+        <h2>Let's find what's capping your rankings.</h2>
+        <p>Based in Lahore, working with clients across the UK, US, UAE and KSA. Send a note and I'll reply with next steps.</p>
+        <div class="contact-links">
+          <a class="btn btn-solid" href="mailto:wajeeh.ahmad18@gmail.com">wajeeh.ahmad18@gmail.com</a>
+          <a class="btn btn-ghost" href="tel:+923224968898">+92 322 4968898</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/wajeeh-ahmad-a90586219/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="complete">
+        <div class="badge" id="completeBadge">✓ Full profile viewed — audit complete</div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>Lahore, Pakistan · Wajeeh Ahmad</footer>
+
+<script>
+(function(){
+  // scroll progress
+  var progress = document.getElementById('progress');
+  function onScroll(){
+    var h = document.documentElement;
+    var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progress.style.width = pct + '%';
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // reveal on scroll
+  var reveals = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); });
+  }, {threshold:.15});
+  reveals.forEach(function(el){ io.observe(el); });
+
+  // stat counters
+  var stats = document.querySelectorAll('.stat b');
+  var statsDone = false;
+  var statIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting && !statsDone){
+        statsDone = true;
+        stats.forEach(function(el,i){
+          setTimeout(function(){ el.textContent = el.getAttribute('data-target'); }, i*150);
+        });
+      }
+    });
+  }, {threshold:.5});
+  if(stats.length) statIO.observe(stats[0].closest('.stat-row'));
+
+  // complete badge
+  var badge = document.getElementById('completeBadge');
+  var badgeIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) badge.classList.add('in'); });
+  }, {threshold:.6});
+  badgeIO.observe(badge);
+
+  // dot nav active state + click scroll
+  var sections = ['hero','expertise','experience','work','stack','contact'].map(function(id){return document.getElementById(id);});
+  var dots = document.querySelectorAll('.dotnav button');
+  dots.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var target = document.getElementById(btn.getAttribute('data-target'));
+      if(target) target.scrollIntoView({behavior:'smooth'});
+    });
+  });
+  var navIO = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var idx = sections.indexOf(e.target);
+        dots.forEach(function(d,i){ d.classList.toggle('active', i===idx); });
+      }
+    });
+  }, {threshold:.5});
+  sections.forEach(function(s){ if(s) navIO.observe(s); });
+})();
+</script>
+
+</body>
+</html>
